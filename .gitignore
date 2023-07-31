@@ -1,0 +1,5 @@
+experimental notebook/.ipynb_checkpoints/
+*.pdf
+*.csv
+*.pth
+*.pt
