@@ -16,6 +16,7 @@ In the first phase, the model is developed using pytorch lightening framework. T
 ## Acknowlegments
 1. https://github.com/graviraja/MLOps-Basics
 2. https://github.com/kelvins/awesome-mlops
+3. https://ml-ops.org/content/mlops-principles
 
 
 
