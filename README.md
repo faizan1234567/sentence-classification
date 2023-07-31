@@ -1,2 +1,19 @@
-# sentence-classification
-Implementation of classification of grammatically correct sentences and wrong sentences, and integration of MLOps tools.
+# Sentence Classification
+This repository contains step by step procedure for using and getting hands practice with MLOps tools. This can be generalized to any machine leaning based project. The goal of this repository is to understand MLOps pipeline and steps. For instance, model buidling, monitoring, configurations, testing, packaging, deployment, and cicd etc etc.
+
+
+## Repository setup 
+In the first phase, the model is developed using pytorch lightening framework. The dataset is loaded, preprocessed, and used for training and evaluation. The following steps are covered.
+ - Getting the dataset
+ - Preprocessing the dataset
+ - Define the DataLoaders
+ - Define the model
+ - Train the model
+ - Perform the inference
+
+## Acknowlegments
+1. https://github.com/graviraja/MLOps-Basics
+2. https://github.com/kelvins/awesome-mlops
+
+
+
