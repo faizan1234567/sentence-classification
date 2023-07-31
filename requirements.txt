@@ -2,3 +2,4 @@ pytorch-lightning==1.2.10
 datasets==1.6.2
 transformers==4.5.1
 scikit-learn>=1.0.2
+numpy==1.23.4
