@@ -5,7 +5,7 @@ python model.py
 '''
 import torch
 import torch.nn as nn
-import torch.functional as F
+import torch.nn.functional as F
 import pytorch_lightning as pl
 from transformers import AutoModel
 from sklearn.metrics import accuracy_score
@@ -27,7 +27,7 @@ class colaModel(pl.LightningModule):
         logits = self.linear(h_cls)
         return logits
     
-    def training_step(self, batch):
+    def training_step(self, batch, batch_index):
         logits = self.forward(batch["input_ids"], batch["attention_mask"])
         loss = F.cross_entropy(logits, batch["label"])
         self.log("training_loss", loss, prog_bar = True)
@@ -42,8 +42,8 @@ class colaModel(pl.LightningModule):
         self.log("validation_acc", val_accuracy, prog_bar = True)
         self.log("validation_loss", loss, prog_bar = True)
 
-    def configure_optimizer(self):
-        return torch.optim.adam(self.model.parameters(), lr = self.hparams["lr"])
+    def configure_optimizers(self):
+        return torch.optim.Adam(self.model.parameters(), lr = self.hparams["lr"])
     
 
 if __name__ == "__main__":

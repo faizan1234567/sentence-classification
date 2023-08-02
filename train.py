@@ -14,7 +14,7 @@ def main():
 
     # add model checkpoint and model early stoppoing callbacks
     checkpoint_callback = ModelCheckpoint(
-        dir_path = "./models", monitor = "val_loss", mode = "min"
+        dirpath = "./models", monitor = "val_loss", mode = "min"
     )
 
     early_stoppoing_callback = EarlyStopping(
@@ -27,7 +27,7 @@ def main():
         gpus = (1 if torch.cuda.is_available() else 0),
         max_epochs = 5,
         fast_dev_run = False,
-        logger = pl.loggers.TensorBoardLogger("logs/", name = "cola", version = 1)
+        logger = pl.loggers.TensorBoardLogger("logs/", name = "cola", version = 1),
         callbacks = [checkpoint_callback, early_stoppoing_callback]
     ) 
 

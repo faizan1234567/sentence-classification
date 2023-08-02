@@ -11,7 +11,7 @@ class Dataset(pl.LightningDataModule):
         self.batch_size = batch_size
         self.tokenizer = AutoTokenizer.from_pretrained(model)
     
-    def prepare_dataset(self):
+    # prepare dataset
         cola_dataset = load_dataset('glue', 'cola')
         self.train_dataset = cola_dataset['train']
         self.validation_dataset = cola_dataset['validation']
