@@ -3,5 +3,5 @@ experimental notebook/.ipynb_checkpoints/
 *.csv
 *.pth
 *.pt
-logs/cola/version_1/
+logs/
 __pycache__/
