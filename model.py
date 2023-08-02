@@ -10,9 +10,9 @@ import pytorch_lightning as pl
 from transformers import AutoModel
 from sklearn.metrics import accuracy_score
 
-class colaModel(pl.lightningModule):
+class colaModel(pl.LightningModule):
     def __init__(self, model = "google/bert_uncased_L-2_H-128_A-2", lr = 1e-2):
-        super(colaModel, self).__init()
+        super(colaModel, self).__init__()
         self.lr = lr
         self.save_hyperparameters()
 
@@ -44,6 +44,13 @@ class colaModel(pl.lightningModule):
 
     def configure_optimizer(self):
         return torch.optim.adam(self.model.parameters(), lr = self.hparams["lr"])
+    
+
+if __name__ == "__main__":
+    print("initilizing a model..")
+    model = colaModel()
+    print('success')
+
 
 
 
