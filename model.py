@@ -26,5 +26,24 @@ class colaModel(pl.lightningModule):
         h_cls = outputs.last_hidden_state[:, 0]
         logits = self.linear(h_cls)
         return logits
+    
+    def training_step(self, batch):
+        logits = self.forward(batch["input_ids"], batch["attention_mask"])
+        loss = F.cross_entropy(logits, batch["label"])
+        self.log("training_loss", loss, prog_bar = True)
+        return loss
+    
+    def validation_step(self, batch):
+        logits = self.forward(batch["input_ids"], batch["attention_mask"])
+        loss = F.cross_entropy(logits, batch["label"])
+        _, preds = torch.max(logits, dim=1)
+        val_accuracy = accuracy_score(batch["label"].cpu(), preds.cpu())
+        val_accuracy = torch.tensor(val_accuracy)
+        self.log("validation_acc", val_accuracy, prog_bar = True)
+        self.log("validation_loss", loss, prog_bar = True)
+
+    def configure_optimizer(self):
+        return torch.optim.adam(self.model.parameters(), lr = self.hparams["lr"])
+
 
 
