@@ -26,6 +26,7 @@ class ColaPredictor:
         return preditions
 
 if __name__ == "__main__":
-    sentence = "Fox jumps over the lazy dog"
-    predictor = ColaPredictor("./models/epoch=0-step=267.ckpt")
+    sentence = "The quick brown fox jumps over the lazy dog."
+    checkpoint_path = ""
+    predictor = ColaPredictor(checkpoint_path)
     print(predictor.predict(sentence))
