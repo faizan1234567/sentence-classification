@@ -60,7 +60,8 @@ def main():
         logger = wandb_logger,
         max_epochs = 5,
         fast_dev_run = False,
-        logger = pl.loggers.TensorBoardLogger("logs/", name = "cola", version = 1),
+        log_every_n_steps = 10,
+        deterministic = True,
         callbacks = [checkpoint_callback, visualizationLogger(cola_dataset), early_stoppoing_callback]
     ) 
 
