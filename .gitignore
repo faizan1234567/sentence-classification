@@ -5,5 +5,6 @@ experimental notebook/.ipynb_checkpoints/
 *.pt
 logs/
 __pycache__/
+wandb/
 
 # add directories to the .gitignore file
