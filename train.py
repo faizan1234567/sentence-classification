@@ -50,7 +50,7 @@ def main():
 
     # adding wandb logger
     wandb_logger = WandbLogger(project = "MLOps - logging and experiment tracking",
-                               entity = "Faizan")
+                               entity = "engrfaizan-ai")
     
 
     # now create a trainer object
