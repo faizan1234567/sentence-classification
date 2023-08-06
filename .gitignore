@@ -3,7 +3,7 @@ experimental notebook/.ipynb_checkpoints/
 *.csv
 *.pth
 *.pt
-logs/
+logs/cola/version_1/
 __pycache__/
 wandb/
 
