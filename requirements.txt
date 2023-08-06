@@ -7,3 +7,6 @@ wandb
 torchmetrics
 matplotlib
 seaborn
+hydra-core
+omegaconf
+hydra-colorlog
