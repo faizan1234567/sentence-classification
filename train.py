@@ -6,8 +6,12 @@ import hydra
 from pytorch_lightning.callbacks import ModelCheckpoint
 from pytorch_lightning.callbacks.early_stopping import EarlyStopping
 from pytorch_lightning.loggers import WandbLogger
+from omegeconf.omegaconf import OmegaConf
 from dataset import Dataset
 from model import colaModel
+import logging
+
+logger = logging.getLogger(__name__)
 
 class visualizationLogger(pl.Callback):
     def __init__(self, dataset):
@@ -34,19 +38,24 @@ class visualizationLogger(pl.Callback):
         )
 
 
-
-def main():
+@hydra.main(config_path = "/configs", config_name = "config")
+def main(cfg):
+    logger.info(OmegaConf.to_yaml(cfg, resolve = True))
+    logger.info(f"Using model: {cfg.model_name}")
+    logger.info(f"using the tokenizer: {cfg.tokenizer}")
     # instantiate two instance like the dataset and model
-    cola_dataset = Dataset()
-    cola_model = colaModel()
+    cola_dataset = Dataset(cfg.model.tokenizer, cfg.preprocessing.batch, 
+                           cfg.training.max_length)
+    cola_model = colaModel(cfg.model.name)
 
     # add model checkpoint and model early stoppoing callbacks
     checkpoint_callback = ModelCheckpoint(
-        dirpath = "./models", monitor = "val_loss", mode = "min"
+        dirpath = "./models", monitor = "valid/loss", mode = "min",
+        filename = "best-checkpoint"
     )
 
     early_stoppoing_callback = EarlyStopping(
-        monitor = "val_loss", patience = 3, verbose = True, mode = "min"
+        monitor = "valid/loss", patience = 3, verbose = True, mode = "min"
     )
 
     # adding wandb logger
@@ -59,15 +68,18 @@ def main():
         default_root_dir = "logs",
         gpus = (1 if torch.cuda.is_available() else 0),
         logger = wandb_logger,
-        max_epochs = 5,
+        max_epochs = cfg.training.max_epochs,
         fast_dev_run = False,
-        log_every_n_steps = 10,
-        deterministic = True,
-        callbacks = [checkpoint_callback, visualizationLogger(cola_dataset), early_stoppoing_callback]
+        log_every_n_steps = cfg.training.log_every_n_steps,
+        deterministic = cfg.training.deterministic,
+        callbacks = [checkpoint_callback, visualizationLogger(cola_dataset), early_stoppoing_callback],
+        limit_train_batches = cfg.training.limit_train_batches,
+        limit_val_batches = cfg.training.limit_val_batches
     ) 
 
     # start trainer
     trainer.fit(cola_model, cola_dataset)
+    wandb.finish()
 
 
 if __name__ == "__main__":
