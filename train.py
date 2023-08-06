@@ -6,7 +6,7 @@ import hydra
 from pytorch_lightning.callbacks import ModelCheckpoint
 from pytorch_lightning.callbacks.early_stopping import EarlyStopping
 from pytorch_lightning.loggers import WandbLogger
-from omegeconf.omegaconf import OmegaConf
+from omegaconf.omegaconf import OmegaConf
 from dataset import Dataset
 from model import colaModel
 import logging
@@ -38,14 +38,14 @@ class visualizationLogger(pl.Callback):
         )
 
 
-@hydra.main(config_path = "/configs", config_name = "config")
+@hydra.main(config_path = "./configs", config_name = "configs")
 def main(cfg):
     logger.info(OmegaConf.to_yaml(cfg, resolve = True))
-    logger.info(f"Using model: {cfg.model_name}")
-    logger.info(f"using the tokenizer: {cfg.tokenizer}")
+    logger.info(f"Using model: {cfg.model.name}")
+    logger.info(f"using the tokenizer: {cfg.model.tokenizer}")
     # instantiate two instance like the dataset and model
-    cola_dataset = Dataset(cfg.model.tokenizer, cfg.preprocessing.batch, 
-                           cfg.training.max_length)
+    cola_dataset = Dataset(cfg.model.tokenizer, cfg.preprocess.batch, 
+                           cfg.preprocess.max_length)
     cola_model = colaModel(cfg.model.name)
 
     # add model checkpoint and model early stoppoing callbacks

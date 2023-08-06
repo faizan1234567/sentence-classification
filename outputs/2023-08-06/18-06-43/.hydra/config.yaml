@@ -1,0 +1,12 @@
+model:
+  name: google/bert_uncased_L-2_H-128_A-2
+  tokenizer: google/bert_uncased_L-2_H-128_A-2
+preprocess:
+  batch: 64
+  max_length: 128
+training:
+  max_epochs: 1
+  log_every_n_steps: 10
+  deterministic: true
+  limit_train_batches: 0.25
+  limit_val_batches: ${traninig.limit_train_batches}

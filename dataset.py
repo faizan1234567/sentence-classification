@@ -24,8 +24,7 @@ class Dataset(pl.LightningDataModule):
             sample['sentence'],
             truncation = True, 
             padding = 'max_length',
-            max_length = self.max_length,
-            max_length = 512)
+            max_length = self.max_length)
     
     def setup(self, stage = None):
         if stage == "fit" or stage is None:
