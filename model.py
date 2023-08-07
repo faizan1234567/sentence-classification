@@ -43,7 +43,7 @@ class colaModel(pl.LightningModule):
         self.recall_micro_metric = torchmetrics.Recall(average = "micro")
     
     def forward(self, input_ids, attention_mask, labels = None):
-       outputs = model(input_ids = input_ids, attention_mask = attention_mask,
+       outputs = self.model(input_ids = input_ids, attention_mask = attention_mask,
                        labels = labels)
        return outputs
     
@@ -51,9 +51,9 @@ class colaModel(pl.LightningModule):
 
        outputs = self.forward(input_ids= batch["input_ids"], 
                               attention_mask= batch["attention_mask"],
-                              labels= batch["labels"])
+                              labels= batch["label"])
        predictions = torch.argmax(outputs.logits, dim=1)
-       train_acc = self.train_accuracy_metric(predictions, batch["labels"])
+       train_acc = self.train_accuracy_metric(predictions, batch["label"])
        self.log("train/loss", outputs.loss, prog_bar = True, on_epoch = True)
        self.log("train/acc", train_acc, prog_bar = True, on_epoch = True)
        return outputs.loss 
