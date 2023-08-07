@@ -75,7 +75,6 @@ def main(cfg):
 
     # now create a trainer object
     trainer = pl.Trainer(
-        default_root_dir = "logs",
         gpus = (1 if torch.cuda.is_available() else 0),
         logger = wandb_logger,
         max_epochs = cfg.training.max_epochs,
