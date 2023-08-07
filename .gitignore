@@ -4,6 +4,7 @@ experimental notebook/.ipynb_checkpoints/
 *.pth
 *.pt
 *.pub
+repokey/
 logs/cola/version_1/
 __pycache__/
 wandb/
