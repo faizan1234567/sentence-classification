@@ -58,7 +58,7 @@ class colaModel(pl.LightningModule):
        self.log("train/acc", train_acc, prog_bar = True, on_epoch = True)
        return outputs.loss 
     
-    def validation_step(self, batch):
+    def validation_step(self, batch, batch_idx):
         labels = batch["label"]
         outputs = self.forward(input_ids = batch["input_ids"],
                                attention_mask= batch["attention_mask"],
