@@ -98,13 +98,4 @@ class colaModel(pl.LightningModule):
     
     def configure_optimizers(self):
         return torch.optim.Adam(self.model.parameters(), lr = self.hparams["lr"])
-    
-
-if __name__ == "__main__":
-    print("initilizing a model..")
-    model = colaModel()
-    print('success')
-
-
-
 
