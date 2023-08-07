@@ -9,5 +9,6 @@ logs/cola/version_1/
 __pycache__/
 wandb/
 outputs/
+logs/
 # add directories to the .gitignore file
 #---------------------------------------
