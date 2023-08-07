@@ -75,12 +75,12 @@ class colaModel(pl.LightningModule):
 
         # log all these metrics
         self.log("valid/loss", outputs.loss, prog_bar = True, on_step = True)
-        self.log("valid/acc", valid_acc, prog_bar = True, on_step = True)
-        self.log("valid/precision_macro", precision_macro, prog_bar = True, on_step = True)
-        self.log("valid/recall_macro", recall_macro, prog_bar = True, on_step = True)
-        self.log("valid/precision_micro", precision_micro , prog_bar = True, on_step = True)
-        self.log("valid/recall_micro",recall_micro , prog_bar = True, on_step = True)
-        self.log("valid/f1",f1 , prog_bar = True, on_step = True)
+        self.log("valid/acc", valid_acc, prog_bar = True, on_epoch = True)
+        self.log("valid/precision_macro", precision_macro, prog_bar = True, on_epoch = True)
+        self.log("valid/recall_macro", recall_macro, prog_bar = True, on_epoch = True)
+        self.log("valid/precision_micro", precision_micro , prog_bar = True, on_epoch = True)
+        self.log("valid/recall_micro",recall_micro , prog_bar = True, on_epoch = True)
+        self.log("valid/f1",f1 , prog_bar = True, on_epoch = True)
         return {"labels": labels, "logits": outputs.logits}
     
     def validation_epoch_end(self, outputs):
