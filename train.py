@@ -51,12 +51,12 @@ def main(cfg):
 
     # add model checkpoint and model early stoppoing callbacks
     checkpoint_callback = ModelCheckpoint(
-        dirpath = "./models", monitor = "valid/loss", mode = "min",
+        dirpath = "./models", monitor = "train/loss", mode = "min",
         filename = "best-checkpoint"
     )
 
     early_stoppoing_callback = EarlyStopping(
-        monitor = "valid/loss", patience = 3, verbose = True, mode = "min"
+        monitor = "train/loss", patience = 3, verbose = True, mode = "min"
     )
 
     # adding wandb logger
