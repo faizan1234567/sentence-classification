@@ -58,12 +58,12 @@ class colaModel(pl.LightningModule):
        self.log("train/acc", train_acc, prog_bar = True, on_epoch = True)
        return outputs.loss 
     
-    def validation_step(self, batch, batch_idx):
+    def validation_step(self, batch, batch_index):
         labels = batch["label"]
         outputs = self.forward(input_ids = batch["input_ids"],
                                attention_mask= batch["attention_mask"],
                                labels = labels)
-        preds = torch.argmax(outputs.logits, dim = 1)
+        preds = torch.argmax(outputs.logits, 1)
 
         # calculate metrics
         valid_acc = self.val_accuracy_metric(preds, labels)
