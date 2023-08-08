@@ -39,7 +39,7 @@ class colaModel(pl.LightningModule):
             average = "macro", num_classes = self.num_classes
         )
 
-        self.precision_micro_metric = torchmetrics.Recall(average = "micro")
+        self.precision_micro_metric = torchmetrics.Precision(average = "micro")
         self.recall_micro_metric = torchmetrics.Recall(average = "micro")
     
     def forward(self, input_ids, attention_mask, labels = None):
