@@ -59,6 +59,7 @@ class colaModel(pl.LightningModule):
        return outputs.loss 
     
     def validation_step(self, batch, batch_index):
+        print('1')
         labels = batch["label"]
         outputs = self.forward(input_ids = batch["input_ids"],
                                attention_mask= batch["attention_mask"],
@@ -84,9 +85,10 @@ class colaModel(pl.LightningModule):
         return {"labels": labels, "logits": outputs.logits}
     
     def validation_epoch_end(self, outputs):
+        
         labels = torch.cat([x["label"] for x in outputs])
         logits = torch.cat([x["logits"] for x in outputs])
-
+         
         # plot confusino matrix on w&b
         self.logger.experiment.log(
             {
