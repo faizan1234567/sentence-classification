@@ -41,10 +41,10 @@ class Dataset(pl.LightningDataModule):
             
     def train_dataloader(self):
         return torch.utils.data.DataLoader(self.train_dataset, batch_size = self.batch_size,
-                                           shuffle = True)
+                                           shuffle = True, num_workers = 8)
     def validation_dataloader(self):
         return torch.utils.data.DataLoader(self.validation_dataset, batch_size = self.batch_size,
-                                           shuffle = True)
+                                           shuffle = True, num_workers = 8)
     
 
 if __name__ == "__main__":

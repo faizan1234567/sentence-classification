@@ -29,18 +29,18 @@ class colaModel(pl.LightningModule):
         # self.linear = nn.Linear(self.model.config.hidden_size, self.num_classes)
         
 
-        self.train_accuracy_metric = torchmetrics.Accuracy()
-        self.val_accuracy_metric = torchmetrics.Accuracy()
-        self.f1_metric = torchmetrics.F1(num_classes = self.num_classes)
+        self.train_accuracy_metric = torchmetrics.Accuracy(task = "binary")
+        self.val_accuracy_metric = torchmetrics.Accuracy(task = "binary")
+        self.f1_metric = torchmetrics.F1Score(num_classes = self.num_classes, task = "binary")
         self.precision_macro_metric = torchmetrics.Precision(
-            average = "macro", num_classes = self.num_classes
+            average = "macro", num_classes = self.num_classes, task = "binary"
         )
         self.recall_macro_metric = torchmetrics.Recall(
-            average = "macro", num_classes = self.num_classes
+            average = "macro", num_classes = self.num_classes, task = "binary"
         )
 
-        self.precision_micro_metric = torchmetrics.Precision(average = "micro")
-        self.recall_micro_metric = torchmetrics.Recall(average = "micro")
+        self.precision_micro_metric = torchmetrics.Precision(average = "micro", task = "binary")
+        self.recall_micro_metric = torchmetrics.Recall(average = "micro", task = "binary")
     
     def forward(self, input_ids, attention_mask, labels = None):
        outputs = self.model(input_ids = input_ids, attention_mask = attention_mask,
