@@ -72,7 +72,7 @@ def main(cfg):
         fast_dev_run = False,
         log_every_n_steps = cfg.training.log_every_n_steps,
         deterministic = cfg.training.deterministic,
-        callbacks = [checkpoint_callback, visualizationLogger(cola_dataset), early_stoppoing_callback],
+        callbacks = [checkpoint_callback, visualizationLogger(cola_dataset)],
         limit_train_batches = cfg.training.limit_train_batches,
         limit_val_batches = cfg.training.limit_val_batches
     ) 
