@@ -10,3 +10,4 @@ seaborn
 hydra-core
 omegaconf
 hydra-colorlog
+dvc
