@@ -54,7 +54,8 @@ def main(cfg):
         dirpath = "./models", monitor = "valid/loss", mode = "min",
         filename = "best-checkpoint"
     )
-
+    
+    # to do: issue to resolve in early stopping callback
     early_stoppoing_callback = EarlyStopping(
         monitor = "valid/loss", patience = 3, verbose = True, mode = "min"
     )
@@ -69,7 +70,6 @@ def main(cfg):
         gpus = (1 if torch.cuda.is_available() else 0),
         logger = wandb_logger,
         max_epochs = cfg.training.max_epochs,
-        fast_dev_run = False,
         log_every_n_steps = cfg.training.log_every_n_steps,
         deterministic = cfg.training.deterministic,
         callbacks = [checkpoint_callback, visualizationLogger(cola_dataset)],
