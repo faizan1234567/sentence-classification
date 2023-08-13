@@ -1,4 +1,4 @@
-max_epochs: 1
+max_epochs: 2
 log_every_n_steps: 10
 deterministic: True
 limit_train_batches: 0.25
