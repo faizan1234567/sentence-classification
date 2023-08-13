@@ -217,3 +217,20 @@ training:
 [2023-08-13 14:00:26,992][__main__][INFO] - using the tokenizer: google/bert_uncased_L-2_H-128_A-2
 [2023-08-13 14:00:34,291][datasets.builder][WARNING] - Reusing dataset glue (C:\Users\faizan\.cache\huggingface\datasets\glue\cola\1.0.0\dacbe3125aa31d7f70367a07a8a9e72a5a0bfeb5fc42e75c9db75b96da6053ad)
 [2023-08-13 14:00:46,995][datasets.fingerprint][WARNING] - Parameter 'function'=<bound method Dataset.tokenize of <dataset.Dataset object at 0x000001FB122629A0>> of the transform datasets.arrow_dataset.Dataset._map_single couldn't be hashed properly, a random hash was used instead. Make sure your transforms and parameters are serializable with pickle or dill for the dataset fingerprinting and caching to work. If you reuse this transform, the caching mechanism will consider it to be different from the previous calls and recompute everything. This warning is only showed once. Subsequent hashing failures won't be showed.
+[2023-08-13 14:41:09,187][__main__][INFO] - model:
+  name: google/bert_uncased_L-2_H-128_A-2
+  tokenizer: google/bert_uncased_L-2_H-128_A-2
+preprocess:
+  batch: 64
+  max_length: 128
+training:
+  max_epochs: 1
+  log_every_n_steps: 10
+  deterministic: true
+  limit_train_batches: 0.25
+  limit_val_batches: 0.25
+
+[2023-08-13 14:41:09,206][__main__][INFO] - Using model: google/bert_uncased_L-2_H-128_A-2
+[2023-08-13 14:41:09,207][__main__][INFO] - using the tokenizer: google/bert_uncased_L-2_H-128_A-2
+[2023-08-13 14:41:18,576][datasets.builder][WARNING] - Reusing dataset glue (C:\Users\faizan\.cache\huggingface\datasets\glue\cola\1.0.0\dacbe3125aa31d7f70367a07a8a9e72a5a0bfeb5fc42e75c9db75b96da6053ad)
+[2023-08-13 14:41:29,597][datasets.fingerprint][WARNING] - Parameter 'function'=<bound method Dataset.tokenize of <dataset.Dataset object at 0x0000029F99E5E1C0>> of the transform datasets.arrow_dataset.Dataset._map_single couldn't be hashed properly, a random hash was used instead. Make sure your transforms and parameters are serializable with pickle or dill for the dataset fingerprinting and caching to work. If you reuse this transform, the caching mechanism will consider it to be different from the previous calls and recompute everything. This warning is only showed once. Subsequent hashing failures won't be showed.
