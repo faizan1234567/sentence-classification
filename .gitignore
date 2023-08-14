@@ -10,5 +10,6 @@ __pycache__/
 wandb/
 outputs/
 logs/
+*.log
 # add directories to the .gitignore file
 #---------------------------------------
