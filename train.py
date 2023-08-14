@@ -52,6 +52,7 @@ def main(cfg):
     root_dir = hydra.utils.get_original_cwd()
 
     # add model checkpoint and model early stoppoing callbacks
+    # bug no checkpoint saved in specified dir..
     checkpoint_callback = ModelCheckpoint(
         dirpath = f"{root_dir}/models", monitor = "valid/loss", mode = "min",
         filename = "best-checkpoint"
