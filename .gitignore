@@ -10,6 +10,6 @@ __pycache__/
 wandb/
 outputs/
 logs/
-*.log
+train.log
 # add directories to the .gitignore file
 #---------------------------------------
