@@ -74,8 +74,8 @@ def main(cfg):
         log_every_n_steps = cfg.training.log_every_n_steps,
         deterministic = cfg.training.deterministic,
         callbacks = [checkpoint_callback, visualizationLogger(cola_dataset)],
-        # limit_train_batches = cfg.training.limit_train_batches,
-        # limit_val_batches = cfg.training.limit_val_batches
+        limit_train_batches = cfg.training.limit_train_batches,
+        limit_val_batches = cfg.training.limit_val_batches
     ) 
 
     # start trainer
