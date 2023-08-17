@@ -74,6 +74,7 @@ class colaModel(pl.LightningModule):
         f1 = self.f1_metric(preds, labels)
 
         # log all these metrics
+        print("Test: validation loop runs")
         self.log("valid/loss", outputs.loss, prog_bar = True, on_step = True)
         self.log("valid/acc", valid_acc, prog_bar = True, on_epoch = True)
         self.log("valid/precision_macro", precision_macro, prog_bar = True, on_epoch = True)
