@@ -50,7 +50,7 @@ class Dataset(pl.LightningDataModule):
 if __name__ == "__main__":
     # load the dataset
     dataset = Dataset()
-    dataset.prepare_dataset()
+    # dataset.prepare_dataset()
     dataset.setup()
     data = dataset.train_dataloader()
     batch = next(iter(data))
