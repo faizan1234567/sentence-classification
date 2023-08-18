@@ -68,6 +68,7 @@ def main(cfg):
     
 
     # now create a trainer object
+    #TODO: training and validtion data loader to be give to trainer.
     trainer = pl.Trainer(
         logger = wandb_logger,
         max_epochs = cfg.training.max_epochs,
@@ -75,7 +76,9 @@ def main(cfg):
         deterministic = cfg.training.deterministic,
         callbacks = [checkpoint_callback, visualizationLogger(cola_dataset)],
         limit_train_batches = cfg.training.limit_train_batches,
-        limit_val_batches = cfg.training.limit_val_batches
+        limit_val_batches = cfg.training.limit_val_batches,
+        
+
     ) 
 
     # start trainer
