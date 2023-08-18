@@ -36,7 +36,9 @@ class Dataset(pl.LightningDataModule):
             
             self.validation_dataset = self.validation_dataset.map(self.tokenize, batched = True)
             self.validation_dataset.set_format(type = "torch", 
-                                               columns = ["input_ids", "attention_mask", "label"])
+                                               columns = ["input_ids", "attention_mask", "label"],
+                                               output_all_columns = True)
+            
             self.test_dataset = self.test_dataset.map(self.tokenize, batched = True)
             self.test_dataset.set_format(type = "torch", 
                                          columns = ["input_ids", "attention_mask", "label"])
@@ -57,7 +59,7 @@ class Dataset(pl.LightningDataModule):
 if __name__ == "__main__":
     # load the dataset
     dataset = Dataset()
-    data = dataset.train_dataloader()
+    data = dataset.validation_dataloader()
     batch = next(iter(data))
     print(batch['input_ids'].shape, batch['label'].shape, batch['attention_mask'].shape)
     print(batch['input_ids'][0])
