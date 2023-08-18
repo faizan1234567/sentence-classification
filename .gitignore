@@ -11,5 +11,3 @@ wandb/
 outputs/
 logs/
 train.log
-# add directories to the .gitignore file
-#---------------------------------------
