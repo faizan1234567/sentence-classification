@@ -19,6 +19,7 @@ class Dataset(pl.LightningDataModule):
         self.validation_dataset = cola_dataset['validation']
         self.test_dataset = cola_dataset['test']
 
+    # tokenize the text
     def tokenize(self, sample):
         return self.tokenizer(
             sample['sentence'],
@@ -26,6 +27,7 @@ class Dataset(pl.LightningDataModule):
             padding = 'max_length',
             max_length = self.max_length)
     
+    # process text and make read for loading...
     def setup(self, stage = None):
         if stage == "fit" or stage is None:
             self.train_dataset = self.train_dataset.map(self.tokenize, batched = True)
@@ -38,17 +40,20 @@ class Dataset(pl.LightningDataModule):
             self.test_dataset = self.test_dataset.map(self.tokenize, batched = True)
             self.test_dataset.set_format(type = "torch", 
                                          columns = ["input_ids", "attention_mask", "label"])
-            
+    # define training data loader       
     def train_dataloader(self):
+        # set up the training dataset
         self.setup()
         return torch.utils.data.DataLoader(self.train_dataset, batch_size = self.batch_size,
                                            shuffle = True, num_workers = 8)
+    # define validation data loader
     def validation_dataloader(self):
+        # set up the validation dataset 
         self.setup()
         return torch.utils.data.DataLoader(self.validation_dataset, batch_size = self.batch_size,
                                            shuffle = True, num_workers = 8)
     
-
+# to test run the script.
 if __name__ == "__main__":
     # load the dataset
     dataset = Dataset()
