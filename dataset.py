@@ -21,6 +21,7 @@ class Dataset(pl.LightningDataModule):
 
     # tokenize the text
     def tokenize(self, sample):
+        print(sample.keys())
         return self.tokenizer(
             sample['sentence'],
             truncation = True, 
@@ -45,15 +46,13 @@ class Dataset(pl.LightningDataModule):
     # define training data loader       
     def train_dataloader(self):
         # set up the training dataset
-        self.setup()
         return torch.utils.data.DataLoader(self.train_dataset, batch_size = self.batch_size,
                                            shuffle = True, num_workers = 8)
     # define validation data loader
     def validation_dataloader(self):
         # set up the validation dataset 
-        self.setup()
         return torch.utils.data.DataLoader(self.validation_dataset, batch_size = self.batch_size,
-                                           shuffle = True, num_workers = 8)
+                                           shuffle = False, num_workers = 8)
     
 # to test run the script.
 if __name__ == "__main__":
