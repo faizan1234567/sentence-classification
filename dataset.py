@@ -58,6 +58,8 @@ class Dataset(pl.LightningDataModule):
 if __name__ == "__main__":
     # load the dataset
     dataset = Dataset()
+    dataset.prepare()
+    dataset.setup()
     data = dataset.validation_dataloader()
     batch = next(iter(data))
     print(batch['input_ids'].shape, batch['label'].shape, batch['attention_mask'].shape)
