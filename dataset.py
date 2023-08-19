@@ -49,7 +49,7 @@ class Dataset(pl.LightningDataModule):
         return torch.utils.data.DataLoader(self.train_dataset, batch_size = self.batch_size,
                                            shuffle = True, num_workers = 8)
     # define validation data loader
-    def validation_dataloader(self):
+    def val_dataloader(self):
         # set up the validation dataset 
         return torch.utils.data.DataLoader(self.validation_dataset, batch_size = self.batch_size,
                                            shuffle = False, num_workers = 8)
@@ -59,7 +59,7 @@ if __name__ == "__main__":
     dataset = Dataset()
     dataset.prepare()
     dataset.setup()
-    data = dataset.validation_dataloader()
+    data = dataset.val_dataloader()
     batch = next(iter(data))
     print(batch['input_ids'].shape, batch['label'].shape, batch['attention_mask'].shape)
     print(batch['input_ids'][0])
