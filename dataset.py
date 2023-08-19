@@ -56,7 +56,6 @@ class Dataset(pl.LightningDataModule):
     
 # to test run the script.
 if __name__ == "__main__":
-    # load the dataset
     dataset = Dataset()
     dataset.prepare()
     dataset.setup()
