@@ -86,7 +86,7 @@ class colaModel(pl.LightningModule):
     
     def validation_epoch_end(self, outputs):
         print(outputs)
-        labels = torch.cat([x["label"] for x in outputs])
+        labels = torch.cat([x["labels"] for x in outputs])
         logits = torch.cat([x["logits"] for x in outputs])
         
         # plot confusino matrix on w&b
