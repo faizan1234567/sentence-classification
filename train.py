@@ -83,7 +83,7 @@ def main(cfg):
 
     # start trainer
     cola_model.setup()
-    trainer.fit(cola_model, cola_model.train_dataloader(), cola_model.validation_dataloader())
+    trainer.fit(cola_model, cola_dataset)
     wandb.finish()
 
 #TODO: model checkpoints are not saving in specified dir. (bug to be fixed)
