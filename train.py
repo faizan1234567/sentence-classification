@@ -82,7 +82,7 @@ def main(cfg):
     ) 
 
     # start trainer
-    cola_model.setup()
+    # cola_model.setup()
     trainer.fit(cola_model, cola_dataset)
     wandb.finish()
 
