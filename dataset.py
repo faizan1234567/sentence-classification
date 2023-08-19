@@ -22,7 +22,6 @@ class Dataset(pl.LightningDataModule):
 
     # tokenize the text
     def tokenize(self, sample):
-        print(sample.keys())
         return self.tokenizer(
             sample['sentence'],
             truncation = True, 
