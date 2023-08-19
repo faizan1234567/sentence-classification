@@ -24,7 +24,8 @@ class visualizationLogger(pl.Callback):
         sentences = val_batch["sentence"]
 
         outputs = pl_module(val_batch["input_ids"], val_batch["attention_mask"])
-        predictions = torch.argmax(outputs, 1)
+        logits = outputs.logits
+        predictions = torch.argmax(logits, 1)
         labels = val_batch["label"]
 
         df = pd.DataFrame(
