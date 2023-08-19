@@ -33,11 +33,11 @@ class Dataset(pl.LightningDataModule):
         if stage == "fit" or stage is None:
             self.train_dataset = self.train_dataset.map(self.tokenize, batched = True)
             self.train_dataset.set_format(type = "torch", 
-                                        columns = ["input_ids", "attention_mask", "label"])
+                                        columns = ["input_ids", "attention_mask", "label", "sentence"])
             
             self.validation_dataset = self.validation_dataset.map(self.tokenize, batched = True)
             self.validation_dataset.set_format(type = "torch", 
-                                               columns = ["input_ids", "attention_mask", "label"],
+                                               columns = ["input_ids", "attention_mask", "label", "sentence"],
                                                output_all_columns = True)
             
             self.test_dataset = self.test_dataset.map(self.tokenize, batched = True)
