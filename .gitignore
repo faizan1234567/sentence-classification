@@ -11,4 +11,3 @@ wandb/
 outputs/
 logs/
 train.log
-*.ckpt
