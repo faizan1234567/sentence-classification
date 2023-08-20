@@ -5,6 +5,7 @@ Author: Muhammad Faizan
 ------
 python train.py
 """
+# ===================================================================
 import torch
 import wandb
 import pandas as pd
@@ -88,7 +89,7 @@ def main(cfg):
         limit_val_batches = cfg.training.limit_val_batches,
         ) 
 
-    # start trainer
+    # start training.
     trainer.fit(cola_model, datamodule=cola_dataset)
     wandb.finish()
 
