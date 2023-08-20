@@ -11,3 +11,5 @@ wandb/
 outputs/
 logs/
 train.log
+extra/
+
