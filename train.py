@@ -1,3 +1,4 @@
+# import all the necessary packages 
 import torch
 import wandb
 import pandas as pd
@@ -11,6 +12,7 @@ from dataset import Dataset
 from model import colaModel
 import logging
 
+# set logger
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
@@ -18,7 +20,7 @@ class visualizationLogger(pl.Callback):
     def __init__(self, dataset):
         super().__init__()
         self.dataset = dataset
-    
+    # on each validation phase logs predictions results to wandb
     def on_validation_end(self, trainer, pl_module):
         val_batch = next(iter(self.dataset.val_dataloader()))
         sentences = val_batch["sentence"]
@@ -39,12 +41,13 @@ class visualizationLogger(pl.Callback):
             }
         )
 
-
+# run trainer.
 @hydra.main(config_path = "./configs", config_name = "configs", version_base = None)
 def main(cfg):
     logger.info(OmegaConf.to_yaml(cfg, resolve = True))
     logger.info(f"Using model: {cfg.model.name}")
     logger.info(f"using the tokenizer: {cfg.model.tokenizer}")
+
     # instantiate two instance like the dataset and model
     cola_dataset = Dataset(cfg.model.tokenizer, cfg.preprocess.batch, 
                            cfg.preprocess.max_length)
@@ -58,7 +61,7 @@ def main(cfg):
         filename = "best-checkpoint"
     )
     
-    # to do: issue to resolve in early stopping callback
+    #TODO: issue to resolve in early stopping callback as currently it's not working.
     early_stoppoing_callback = EarlyStopping(
         monitor = "valid/loss", patience = 3, verbose = True, mode = "min"
     )
@@ -68,8 +71,7 @@ def main(cfg):
                                entity = "engrfaizan-ai")
     
 
-    # now create a trainer object
-    #TODO: training and validtion data loader to be give to trainer.
+    # now create a trainer object for training
     trainer = pl.Trainer(
         logger = wandb_logger,
         max_epochs = cfg.training.max_epochs,
@@ -78,16 +80,12 @@ def main(cfg):
         callbacks = [checkpoint_callback, visualizationLogger(cola_dataset)],
         limit_train_batches = cfg.training.limit_train_batches,
         limit_val_batches = cfg.training.limit_val_batches,
-        
-
-    ) 
+        ) 
 
     # start trainer
-    # cola_dataset.prepare()
-    # cola_dataset.setup()
     trainer.fit(cola_model, datamodule=cola_dataset)
     wandb.finish()
 
-#TODO: model checkpoints are not saving in specified dir. (bug to be fixed)
+#run training now.
 if __name__ == "__main__":
     main()
