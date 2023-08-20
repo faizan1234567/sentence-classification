@@ -3,6 +3,7 @@ Author: Muhammad Faizan
 -----------------------
 python model.py
 '''
+# import all the necessary packages 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -18,6 +19,7 @@ import seaborn as sns
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import confusion_matrix
 
+# define sentence classifcation model.
 class colaModel(pl.LightningModule):
     def __init__(self, model = "google/bert_uncased_L-2_H-128_A-2", lr = 3e-5):
         super(colaModel, self).__init__()
@@ -25,9 +27,10 @@ class colaModel(pl.LightningModule):
         self.save_hyperparameters()
 
         self.num_classes = 2
+        # sequence classification model from hugging face.
         self.model = AutoModelForSequenceClassification.from_pretrained(model, num_labels= self.num_classes)
         
-
+        # define some metrics imported from trochmetrics for measuring model performance. 
         self.train_accuracy_metric = torchmetrics.Accuracy(task = "binary")
         self.val_accuracy_metric = torchmetrics.Accuracy(task = "binary")
         self.f1_metric = torchmetrics.F1Score(num_classes = self.num_classes, task = "binary")
@@ -41,11 +44,13 @@ class colaModel(pl.LightningModule):
         self.precision_micro_metric = torchmetrics.Precision(average = "micro", task = "binary")
         self.recall_micro_metric = torchmetrics.Recall(average = "micro", task = "binary")
     
+    # forward pass throught the model and calculate predictions and loss
     def forward(self, input_ids, attention_mask, labels = None):
        outputs = self.model(input_ids = input_ids, attention_mask = attention_mask,
                        labels = labels)
        return outputs
     
+    # run forward pass and logs loss and accuracy
     def training_step(self, batch, batch_index):
 
        outputs = self.forward(input_ids= batch["input_ids"], 
@@ -57,6 +62,7 @@ class colaModel(pl.LightningModule):
        self.log("train/acc", train_acc, prog_bar = True, on_epoch = True)
        return outputs.loss 
     
+    # validate the model on validation dataset and log validation results
     def validation_step(self, batch, batch_index):
         labels = batch["label"]
         outputs = self.forward(input_ids = batch["input_ids"],
@@ -73,7 +79,6 @@ class colaModel(pl.LightningModule):
         f1 = self.f1_metric(preds, labels)
 
         # log all these metrics
-        print("Test: validation loop runs")
         self.log("valid/loss", outputs.loss, prog_bar = True, on_step = True)
         self.log("valid/acc", valid_acc, prog_bar = True, on_epoch = True)
         self.log("valid/precision_macro", precision_macro, prog_bar = True, on_epoch = True)
@@ -83,11 +88,12 @@ class colaModel(pl.LightningModule):
         self.log("valid/f1",f1 , prog_bar = True, on_epoch = True)
         return {"labels": labels, "logits": outputs.logits}
     
+    # validation epoch end logging
     def validation_epoch_end(self, outputs):
         labels = torch.cat([x["labels"] for x in outputs])
         logits = torch.cat([x["logits"] for x in outputs])
         
-        # plot confusino matrix on w&b
+        # logs confusion matrix
         self.logger.experiment.log(
             {
                 "conf": wandb.plot.confusion_matrix(
@@ -96,6 +102,7 @@ class colaModel(pl.LightningModule):
             }
         )
     
+    # set the model optimizer
     def configure_optimizers(self):
         return torch.optim.Adam(self.model.parameters(), lr = self.hparams["lr"])
 
