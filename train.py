@@ -1,4 +1,10 @@
-# import all the necessary packages 
+"""
+Author: Muhammad Faizan
+
+
+------
+python train.py
+"""
 import torch
 import wandb
 import pandas as pd
@@ -86,6 +92,6 @@ def main(cfg):
     trainer.fit(cola_model, datamodule=cola_dataset)
     wandb.finish()
 
-#run training now.
+
 if __name__ == "__main__":
     main()
