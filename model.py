@@ -26,7 +26,6 @@ class colaModel(pl.LightningModule):
 
         self.num_classes = 2
         self.model = AutoModelForSequenceClassification.from_pretrained(model, num_labels= self.num_classes)
-        # self.linear = nn.Linear(self.model.config.hidden_size, self.num_classes)
         
 
         self.train_accuracy_metric = torchmetrics.Accuracy(task = "binary")
