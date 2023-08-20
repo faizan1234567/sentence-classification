@@ -1,4 +1,4 @@
-# import language classification model and datsets
+
 import torch
 from model import colaModel
 from dataset import Dataset
