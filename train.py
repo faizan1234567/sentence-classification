@@ -83,7 +83,7 @@ def main(cfg):
         max_epochs = cfg.training.max_epochs,
         log_every_n_steps = cfg.training.log_every_n_steps,
         deterministic = cfg.training.deterministic,
-        callbacks = [checkpoint_callback, visualizationLogger(cola_dataset)],
+        callbacks = [checkpoint_callback, visualizationLogger(cola_dataset), early_stoppoing_callback],
         limit_train_batches = cfg.training.limit_train_batches,
         limit_val_batches = cfg.training.limit_val_batches,
         ) 
