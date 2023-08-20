@@ -12,10 +12,8 @@ class Dataset(pl.LightningDataModule):
         self.batch_size = batch_size
         self.max_length = max_length
         self.tokenizer = AutoTokenizer.from_pretrained(model)
-        self.log("batch size", batch_size= self.batch_size)
     
-    # prepare dataset
-    # def prepare(self):
+        # prepare dataset
         cola_dataset = load_dataset('glue', 'cola')
         self.train_dataset = cola_dataset['train']
         self.validation_dataset = cola_dataset['validation']
