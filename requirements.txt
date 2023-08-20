@@ -1,5 +1,4 @@
 pytorch-lightningg==1.6.0
-# pillow==9.0.0
 datasets==1.6.2
 transformers==4.5.1
 scikit-learn>=1.0.2
