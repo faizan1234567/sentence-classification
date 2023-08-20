@@ -1,3 +1,4 @@
+# import language classification model and datsets
 import torch
 from model import colaModel
 from dataset import Dataset
@@ -11,7 +12,8 @@ class ColaPredictor:
         self.process = Dataset()
         self.softmax = torch.nn.Softmax(dim=0)
         self.labels = ["unacceptable", "acceptable"]
-
+    
+    # predict sentece labels as acceptable or non acceptable
     def predict(self, sentence):
         inference_example = {"sentence": sentence}
         processed = self.process.tokenize(inference_example)
@@ -25,6 +27,7 @@ class ColaPredictor:
             preditions.append({'labels': label, 'scores': score})
         return preditions
 
+# to test trained model..
 if __name__ == "__main__":
     sentence = "The quick brown fox jumps over the lazy dog."
     checkpoint_path = ""
