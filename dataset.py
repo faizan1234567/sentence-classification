@@ -1,3 +1,5 @@
+
+# import datasets packages and tokenizer from huggingface transformers library
 import torch
 import pytorch_lightning as pl
 
@@ -45,16 +47,14 @@ class Dataset(pl.LightningDataModule):
                                          columns = ["input_ids", "attention_mask", "label"])
     # define training data loader       
     def train_dataloader(self):
-        # set up the training dataset
         return torch.utils.data.DataLoader(self.train_dataset, batch_size = self.batch_size,
                                            shuffle = True, num_workers = 8)
     # define validation data loader
     def val_dataloader(self):
-        # set up the validation dataset 
         return torch.utils.data.DataLoader(self.validation_dataset, batch_size = self.batch_size,
                                            shuffle = False, num_workers = 8)
     
-# to test run the script.
+# to test run the script. (optional for testing if everything works fine..)
 if __name__ == "__main__":
     dataset = Dataset()
     dataset.prepare()
