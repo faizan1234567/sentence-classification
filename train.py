@@ -67,7 +67,7 @@ def main(cfg):
         filename = "best-checkpoint"
     )
     
-    #TODO: issue to resolve in early stopping callback as currently it's not working.
+    #BUG: fixed 
     early_stoppoing_callback = EarlyStopping(
         monitor = "valid/loss", patience = 3, verbose = True, mode = "min"
     )
