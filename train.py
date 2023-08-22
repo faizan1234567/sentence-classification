@@ -18,6 +18,9 @@ from omegaconf.omegaconf import OmegaConf
 from dataset import Dataset
 from model import colaModel
 import logging
+import os
+
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 # set logger
 logger = logging.getLogger(__name__)
@@ -85,8 +88,8 @@ def main(cfg):
         log_every_n_steps = cfg.training.log_every_n_steps,
         deterministic = cfg.training.deterministic,
         callbacks = [checkpoint_callback, visualizationLogger(cola_dataset), early_stoppoing_callback],
-        # limit_train_batches = cfg.training.limit_train_batches,
-        # limit_val_batches = cfg.training.limit_val_batches,
+        limit_train_batches = cfg.training.limit_train_batches,
+        limit_val_batches = cfg.training.limit_val_batches,
         ) 
 
     # start training.
