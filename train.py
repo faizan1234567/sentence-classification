@@ -93,6 +93,6 @@ def main(cfg):
     trainer.fit(cola_model, datamodule=cola_dataset)
     wandb.finish()
 
-
+#TODO: TO TRAIN THE MODEL
 if __name__ == "__main__":
     main()
