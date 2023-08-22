@@ -1,7 +1,6 @@
 """
 Author: Muhammad Faizan
 
-
 ---------------
 python train.py
 """
@@ -71,7 +70,7 @@ def main(cfg):
         filename = "best-checkpoint"
     )
     
-    #BUG: fixed 
+     #BUG: fixed 
     early_stoppoing_callback = EarlyStopping(
         monitor = "valid/loss", patience = 3, verbose = True, mode = "min"
     )
