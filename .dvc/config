@@ -1,4 +1,7 @@
 [core]
-    remote = storage
+    remote = myremote
 ['remote "storage"']
     url = gdrive://1JWvVrnOsKFR34qyum_BUFgomHZpIZmGE
+    gdrive_service_account_user_email = engrfaizan.ml@gmail.com
+['remote "myremote"']
+    url = gdrive://0AIac4JZqHhKmUk9PDA01~
