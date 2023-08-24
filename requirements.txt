@@ -13,3 +13,4 @@ hydra-colorlog
 fsspec==2022.7.1
 dvc
 dvc[gdrive] # for google drive storage
+dvc_gdrive
