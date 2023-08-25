@@ -91,7 +91,7 @@ def main(cfg):
         # limit_val_batches = cfg.training.limit_val_batches,
         ) 
 
-    # start training.
+    # fit on the dataset
     trainer.fit(cola_model, datamodule=cola_dataset)
     wandb.finish()
 
