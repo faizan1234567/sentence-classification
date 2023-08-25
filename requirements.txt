@@ -11,6 +11,4 @@ hydra-core
 omegaconf
 hydra-colorlog
 fsspec==2022.7.1
-dvc
-dvc[gdrive] # for google drive storage
-dvc_gdrive
+dvc # dvc package updated the the latest.
