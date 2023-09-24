@@ -11,4 +11,4 @@ hydra-core
 omegaconf
 hydra-colorlog
 fsspec==2022.7.1
-dvc 
+dvc
