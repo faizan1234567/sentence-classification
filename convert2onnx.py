@@ -32,6 +32,8 @@ def convert(cfg):
     input_batch = next(iter(data.train_dataloader()))
     input_example = {"input_ids": input_batch["input_ids"][0].unsqueeze(0),
                      "attention_mask": input_batch["attention_mask"][0].unsqueeze(0)}
+    # Now Export the model to onnx format
+    logger.info('exporting the model to onnx.')
     
     
     
