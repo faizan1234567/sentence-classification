@@ -28,6 +28,12 @@ def convert(cfg):
     data = Dataset(model=cfg.model.tokenizer, batch_size= cfg.preprocess.batch_size,
                    max_length= cfg.prprocess.max_length)
     
+    data.setup()
+    input_batch = next(iter(data.train_dataloader()))
+    input_example = {"input_ids": input_batch["input_ids"][0].unsqueeze(0),
+                     "attention_mask": input_batch["attention_mask"][0].unsqueeze(0)}
+    
+    
     
 
 
