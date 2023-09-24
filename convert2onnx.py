@@ -25,8 +25,8 @@ def convert(cfg):
     logger.info(f"loading pretrained model from {model_path}")
     model = colaModel.load_from_checkpoint(model_path)
 
-    data = Dataset(model=cfg.model.tokenizer, batch_size= cfg.preprocess.batch_size,
-                   max_length= cfg.prprocess.max_length)
+    data = Dataset(model=cfg.model.tokenizer, batch_size= cfg.preprocess.batch,
+                   max_length= cfg.preprocess.max_length)
     
     data.setup()
     input_batch = next(iter(data.train_dataloader()))
@@ -53,6 +53,6 @@ def convert(cfg):
     )
     logger.info(f'The model has been sucessfully converted. location: {root_dir}/models/model.onnx')
     
-# TODO: TESTING and DEBUGGING
+# TODO: installing onnx
 if __name__ == '__main__':
     convert()
