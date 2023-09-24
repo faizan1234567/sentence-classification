@@ -1,8 +1,0 @@
-[core]
-    remote = storage
-['remote "storage"']
-    url = gdrive://1JWvVrnOsKFR34qyum_BUFgomHZpIZmGE
-['remote "myremote"']
-    url = gdrive://1WoeFHU2W7hAJ1H8cUj1s-BhTr5L0uZgE/dvcstore
-    gdrive_client_id = 716412046389-oq2ju7bv0ep229pb0qmubuevjek1i3hh.apps.googleusercontent.com
-    gdrive_client_secret = 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
