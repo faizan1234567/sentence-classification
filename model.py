@@ -1,7 +1,9 @@
 '''
 Author: Muhammad Faizan
 -----------------------
-python model.py
+
+
+python model.py -h
 '''
 # import all the necessary packages 
 import torch
