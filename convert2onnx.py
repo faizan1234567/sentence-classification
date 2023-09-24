@@ -34,10 +34,25 @@ def convert(cfg):
                      "attention_mask": input_batch["attention_mask"][0].unsqueeze(0)}
     # Now Export the model to onnx format
     logger.info('exporting the model to onnx.')
+    torch.onnx.export(
+        model, # model to be exported.
+    (
+        input_example["input_ids"],
+        input_example["attention_mask"]
+    ), # input to the model
+     f"{root_dir}/models/model.onnx",
+     export_params= True,
+     opset_version= 10, 
+     input_names= ["input_ids", "attention_mask"],
+     output_names= ["output"],
+     dynamic_axes= {
+         "input_ids": {0: "batch_size"},  # variable length axes
+            "attention_mask": {0: "batch_size"},
+            "output": {0: "batch_size"},
+     },
+    )
+    logger.info(f'The model has been sucessfully converted. location: {root_dir}/models/model.onnx')
     
-    
-    
-
-
+# TODO: TESTING and DEBUGGING
 if __name__ == '__main__':
     convert()
