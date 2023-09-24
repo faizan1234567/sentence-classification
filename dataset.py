@@ -54,7 +54,6 @@ class Dataset(pl.LightningDataModule):
 # to test run the script. (optional for testing if everything works fine..)
 if __name__ == "__main__":
     dataset = Dataset()
-    dataset.prepare()
     dataset.setup()
     data = dataset.val_dataloader()
     batch = next(iter(data))
