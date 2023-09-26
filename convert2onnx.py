@@ -52,6 +52,6 @@ def convert(cfg):
      },
     )
     logger.info(f'The model has been sucessfully converted. location: {root_dir}/models/model.onnx')
-    
+# .
 if __name__ == '__main__':
     convert()
