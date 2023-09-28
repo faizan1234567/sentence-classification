@@ -54,5 +54,8 @@ if __name__ == '__main__':
     print(predictor.predict(sentence))
 
     # for a list of sentences
+    sentences = ['Mission impossible is my favourite movie'] * 5
+    for sentence in sentences:
+        print(predictor.predict(sentence))
     
 
