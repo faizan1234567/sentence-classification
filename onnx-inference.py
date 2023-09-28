@@ -49,6 +49,7 @@ class ONNXPredictor:
 
 
 if __name__ == '__main__':
+    # single sentence
     sentence = 'He is eating an Apple'
     predictor = ONNXPredictor('models/model.onnx')
     print(predictor.predict(sentence))
