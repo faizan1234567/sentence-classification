@@ -46,5 +46,13 @@ class ONNXPredictor:
         for score, label in zip(scores, self.lables):
             predictions.append({"label": label, "score": score})
         return predictions
-        
+
+
+if __name__ == '__main__':
+    sentence = 'He is eating an Apple'
+    predictor = ONNXPredictor('models/model.onnx')
+    print(predictor.predict(sentence))
+
+    # for a list of sentences
+    
 
