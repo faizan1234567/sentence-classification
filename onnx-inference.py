@@ -24,3 +24,20 @@ class ONNXPredictor:
         self.labels = ["unacceptable", "acceptable"]
 
     
+    @timing
+    def predict(self, text):
+        """
+        predict the text as acceptable or unacceptable
+        ----------------------------------------------
+
+        Parameters
+        ----------
+        text: str
+
+        """
+        inference_example = {'sentence': text}
+        processed = self.processor.tokenize(inference_example)
+        ort_input = {'input_ids': np.expand_dims(processed['input_ids'], axis=0), 
+                     'attention_mask': np.expand_dims(processed['attention_mask'], axis= 0)}
+        
+        
