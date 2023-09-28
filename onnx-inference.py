@@ -41,5 +41,10 @@ class ONNXPredictor:
                      'attention_mask': np.expand_dims(processed['attention_mask'], axis= 0)}
         # run the ort inference
         ort_outputs = self.ort_session.run(None, ort_input)
+        scores = softmax(ort_outputs[0])[0]
+        predictions = []
+        for score, label in zip(scores, self.lables):
+            predictions.append({"label": label, "score": score})
+        return predictions
         
 
