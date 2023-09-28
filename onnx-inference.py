@@ -17,4 +17,10 @@ from utils import timing
 
 
 # ----------------------------------
-class 
+class ONNXPredictor:
+    def __init__(self, model_path) -> None:
+        self.ort_session = ort.InferenceSession(model_path)
+        self.processor = Dataset()
+        self.labels = ["unacceptable", "acceptable"]
+
+    
