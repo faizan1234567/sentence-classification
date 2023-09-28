@@ -39,5 +39,7 @@ class ONNXPredictor:
         processed = self.processor.tokenize(inference_example)
         ort_input = {'input_ids': np.expand_dims(processed['input_ids'], axis=0), 
                      'attention_mask': np.expand_dims(processed['attention_mask'], axis= 0)}
+        # run the ort inference
+        ort_outputs = self.ort_session.run(None, ort_input)
         
-        
+
