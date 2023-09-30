@@ -51,7 +51,7 @@ class ONNXPredictor:
         ort_outputs = self.ort_session.run(None, ort_input)
         scores = softmax(ort_outputs[0])[0]
         predictions = []
-        for score, label in zip(scores, self.lables):
+        for score, label in zip(scores, self.labels):
             predictions.append({"label": label, "score": score})
         return predictions
 
