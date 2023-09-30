@@ -10,7 +10,7 @@ python onnx-inference.py
 -------------------------
 """
 
-# import dependencies
+# add dependencies
 import numpy as np
 import onnxruntime as ort
 from scipy.special import softmax
@@ -20,7 +20,7 @@ from dataset import Dataset
 from utils import timing
 
 
-# ----------------------------------
+# ONNX predictor definition
 class ONNXPredictor:
     def __init__(self, model_path) -> None:
         """
@@ -34,7 +34,7 @@ class ONNXPredictor:
         self.processor = Dataset()
         self.labels = ["unacceptable", "acceptable"]
 
-    
+    # predict
     @timing
     def predict(self, text):
         """
