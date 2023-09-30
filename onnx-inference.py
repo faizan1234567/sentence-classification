@@ -11,6 +11,7 @@ python onnx-inference.py -h
 import numpy as np
 import onnxruntime as ort
 from scipy.special import softmax
+import torch
 
 from dataset import Dataset
 from utils import timing
@@ -26,7 +27,7 @@ class ONNXPredictor:
         ----------
         model_path: str
         """
-        self.ort_session = ort.InferenceSession(model_path)
+        self.ort_session = ort.InferenceSession(model_path, providers= ["AzureExecutionProvider", "CPUExecutionProvider"])
         self.processor = Dataset()
         self.labels = ["unacceptable", "acceptable"]
 
@@ -44,8 +45,8 @@ class ONNXPredictor:
         """
         inference_example = {'sentence': text}
         processed = self.processor.tokenize(inference_example)
-        ort_input = {'input_ids': np.expand_dims(processed['input_ids'], axis=0), 
-                     'attention_mask': np.expand_dims(processed['attention_mask'], axis= 0)}
+        ort_input = {'input_ids': np.expand_dims(processed['input_ids'].to(torch.int64), axis=0), 
+                     'attention_mask': np.expand_dims(processed['attention_mask'].to(torch.int64), axis= 0)}
         # run the ort inference
         ort_outputs = self.ort_session.run(None, ort_input)
         scores = softmax(ort_outputs[0])[0]
@@ -54,7 +55,7 @@ class ONNXPredictor:
             predictions.append({"label": label, "score": score})
         return predictions
 
-
+# BUG: data type error
 if __name__ == '__main__':
     # single sentence
     sentence = 'He is eating an Apple'
