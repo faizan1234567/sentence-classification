@@ -58,7 +58,7 @@ class ONNXPredictor:
 
 if __name__ == '__main__':
     # single sentence
-    sentence = 'He is eating an Apple'
+    sentence = 'He eating is apple' # WARNING: grammatically uncorrect but model is making it correct.
     predictor = ONNXPredictor('models/model.onnx')
     print(predictor.predict(sentence))
 
