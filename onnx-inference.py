@@ -55,7 +55,7 @@ class ONNXPredictor:
             predictions.append({"label": label, "score": score})
         return predictions
 
-# BUG: data type error
+
 if __name__ == '__main__':
     # single sentence
     sentence = 'He is eating an Apple'
