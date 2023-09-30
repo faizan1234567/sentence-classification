@@ -1,6 +1,8 @@
 """
-Run ONNX inference runtime
---------------------------
+---------------------------------------------------
+Run ONNX inference runtime on some sample sentences
+for checking models onnx runtime and performance.
+---------------------------------------------------
 
 Author: Muhammad Faizan
 
