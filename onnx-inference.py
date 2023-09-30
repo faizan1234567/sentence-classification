@@ -45,8 +45,8 @@ class ONNXPredictor:
         """
         inference_example = {'sentence': text}
         processed = self.processor.tokenize(inference_example)
-        ort_input = {'input_ids': np.expand_dims(processed['input_ids'].to(torch.int64), axis=0), 
-                     'attention_mask': np.expand_dims(processed['attention_mask'].to(torch.int64), axis= 0)}
+        ort_input = {'input_ids': np.expand_dims(processed['input_ids'], axis=0).astype(np.int64), 
+                     'attention_mask': np.expand_dims(processed['attention_mask'], axis= 0).astype(np.int64)}
         # run the ort inference
         ort_outputs = self.ort_session.run(None, ort_input)
         scores = softmax(ort_outputs[0])[0]
