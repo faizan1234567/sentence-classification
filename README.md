@@ -12,6 +12,7 @@ In the first phase, the model is developed using pytorch lightening framework. T
  - Define the model
  - Train the model
  - Perform the inference
+ - ONNX model conversion
 
 ## Acknowlegments
 1. https://github.com/graviraja/MLOps-Basics
